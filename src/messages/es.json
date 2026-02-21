@@ -1,0 +1,11 @@
+{
+	"Index": {
+		"title": "Bienvenido a Superteam Brasil",
+		"description": "La plataforma de aprendizaje definitiva para desarrolladores nativos de Solana."
+	},
+	"Navigation": {
+		"courses": "Cursos",
+		"dashboard": "Panel",
+		"leaderboard": "Clasificación"
+	}
+}
