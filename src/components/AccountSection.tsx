@@ -4,6 +4,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { authClient } from "@/lib/auth/client";
 import { useWalletSignIn } from "@/hooks/useWalletSignIn";
+import { ThemeToggle } from "./ThemeToggle";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -118,6 +119,17 @@ export function AccountSection({ accounts }: AccountSectionProps) {
 
 	return (
 		<div style={{ fontFamily: "sans-serif", maxWidth: 360 }}>
+			<div
+				style={{
+					display: "flex",
+					justifyContent: "space-between",
+					marginBottom: 20,
+				}}
+			>
+				<h2 style={{ fontSize: 18, margin: 0 }}>Account Settings</h2>
+				<ThemeToggle />
+			</div>
+
 			{/* Social */}
 			<section>
 				<p

@@ -21,7 +21,7 @@ const serverSchema = z.object({
 
 const clientSchema = z.object({
 	// App URL
-	NEXT_PUBLIC_APP_URL: z.url().default("http://localhost:3000"),
+	NEXT_PUBLIC_APP_URL: z.url(),
 });
 
 const _clientEnv = clientSchema.safeParse({

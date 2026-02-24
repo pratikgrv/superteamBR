@@ -9,6 +9,7 @@ import { notFound } from "next/navigation";
 import { geistSans, geistMono } from "@/app/fonts";
 import { WalletProvider } from "@/providers/WalletProvider";
 import { AuthProvider } from "@/providers/AuthProvider";
+import { ThemeProvider } from "@/providers/ThemeProvider";
 
 import "@/styles/globals.css";
 
@@ -43,18 +44,22 @@ export default async function LocaleLayout({
 	const messages = await getMessages();
 
 	return (
-		<html lang={locale}>
-			<head>
-				<title>Superteam Brazil LMS</title>
-			</head>
+		<html lang={locale} suppressHydrationWarning>
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
-				<AuthProvider>
-					<NextIntlClientProvider messages={messages}>
-						<WalletProvider>{children}</WalletProvider>
-					</NextIntlClientProvider>
-				</AuthProvider>
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="system"
+					enableSystem
+					disableTransitionOnChange
+				>
+					<AuthProvider>
+						<NextIntlClientProvider messages={messages}>
+							<WalletProvider>{children}</WalletProvider>
+						</NextIntlClientProvider>
+					</AuthProvider>
+				</ThemeProvider>
 			</body>
 		</html>
 	);

@@ -6,6 +6,7 @@ import { useCallback, useState } from "react";
 
 import { useWalletSignIn } from "@/hooks/useWalletSignIn";
 import { authClient } from "@/lib/auth/client";
+import { ThemeToggle } from "./ThemeToggle";
 
 export default function LoginPage() {
 	const { wallets, publicKey, select } = useWallet();
@@ -25,8 +26,11 @@ export default function LoginPage() {
 	const notInstalled = wallets.filter((w) => w.readyState === "NotDetected");
 
 	return (
-		<main>
-			<h1>Superteam Academy</h1>
+		<main className="min-h-screen text-foreground p-8">
+			<div className="flex justify-between items-center mb-12">
+				<h1 className="text-3xl font-bold">Superteam Academy</h1>
+				<ThemeToggle />
+			</div>
 			<p>Sign in to continue</p>
 
 			{/* Social */}
