@@ -1,8 +1,40 @@
-export default function Settings() {
+import { headers } from "next/headers";
+import { auth } from "@/lib/auth/server";
+import { db } from "@/lib/db";
+import { account } from "@/lib/db/schema";
+import { eq } from "drizzle-orm";
+import { redirect } from "@/i18n/routing";
+import { AccountSection } from "@/components/AccountSection";
+
+type Props = {
+	params: Promise<{ locale: string }>;
+};
+
+export default async function SettingsPage({ params }: Props) {
+	const { locale } = await params;
+	// 1. Get session server-side
+	const session = await auth.api.getSession({ headers: await headers() });
+
+	if (!session?.user) {
+		redirect({ href: "/", locale });
+	}
+
+	// 2. Fetch linked accounts server-side — no useEffect, no client fetch
+	const accounts = await db
+		.select({
+			id: account.id,
+			userId: account.userId,
+			providerId: account.providerId,
+			accountId: account.accountId,
+		})
+		.from(account)
+		.where(eq(account.userId, session!.user.id as string));
+
+	// 3. Pass as props — AccountSection is pure UI
 	return (
-		<div className="p-8">
-			<h1 className="text-3xl font-bold">Settings</h1>
-			<p className="mt-4 text-gray-600">Manage your account and preferences.</p>
-		</div>
+		<main style={{ padding: 24 }}>
+			<h1 style={{ marginBottom: 20 }}>Account</h1>
+			<AccountSection accounts={accounts} />
+		</main>
 	);
 }

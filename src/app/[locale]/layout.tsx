@@ -4,10 +4,13 @@ import { getMessages, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import type { Metadata } from "next";
 
-import "@/styles/globals.css";
 import { notFound } from "next/navigation";
 
 import { geistSans, geistMono } from "@/app/fonts";
+import { WalletProvider } from "@/providers/WalletProvider";
+import { AuthProvider } from "@/providers/AuthProvider";
+
+import "@/styles/globals.css";
 
 export const metadata: Metadata = {
 	title: "Superteam Brazil LMS",
@@ -47,9 +50,11 @@ export default async function LocaleLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
-				<NextIntlClientProvider messages={messages}>
-					{children}
-				</NextIntlClientProvider>
+				<AuthProvider>
+					<NextIntlClientProvider messages={messages}>
+						<WalletProvider>{children}</WalletProvider>
+					</NextIntlClientProvider>
+				</AuthProvider>
 			</body>
 		</html>
 	);
