@@ -2,7 +2,7 @@ import { z } from "zod";
 
 const serverSchema = z.object({
 	// Database
-	DATABASE_URL: z.string().min(1, "DATABASE_URL is required"),
+	DATABASE_URL: z.string(),
 	DATABASE_AUTH_TOKEN: z.string().optional(),
 
 	// Auth: GitHub
@@ -31,7 +31,7 @@ const _clientEnv = clientSchema.safeParse({
 if (!_clientEnv.success) {
 	console.error(
 		"❌ Invalid client environment variables:",
-		_clientEnv.error.format(),
+		z.treeifyError(_clientEnv.error),
 	);
 	throw new Error("Invalid client environment variables");
 }
