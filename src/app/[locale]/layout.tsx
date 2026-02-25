@@ -1,15 +1,12 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
-
-import { routing } from "@/i18n/routing";
-import type { Metadata } from "next";
-
-import { notFound } from "next/navigation";
-
-import { geistSans, geistMono } from "@/app/fonts";
-import { WalletProvider } from "@/providers/WalletProvider";
+import { geistMono, interSans } from "@/app/fonts";
 import { AuthProvider } from "@/providers/AuthProvider";
 import { ThemeProvider } from "@/providers/ThemeProvider";
+import { WalletProvider } from "@/providers/WalletProvider";
+import { routing } from "@/lib/i18n/routing";
 
 import "@/styles/globals.css";
 
@@ -46,7 +43,7 @@ export default async function LocaleLayout({
 	return (
 		<html lang={locale} suppressHydrationWarning>
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+				className={`${interSans.variable} ${geistMono.variable} antialiased`}
 			>
 				<ThemeProvider
 					attribute="class"

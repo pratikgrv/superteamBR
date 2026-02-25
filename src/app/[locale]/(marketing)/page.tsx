@@ -1,7 +1,10 @@
-import LoginPage from "@/components/LoginModal";
-import { auth } from "@/lib/auth/server";
 import { headers } from "next/headers";
-import { redirect } from "@/i18n/routing";
+import { Features } from "@/components/layout/Features";
+import { Hero } from "@/components/layout/Hero";
+import { LearningPaths } from "@/components/layout/LearningPaths";
+import { SocialProof } from "@/components/layout/SocialProof";
+import { redirect } from "@/lib/i18n/routing";
+import { auth } from "@/lib/auth/server";
 
 type Props = {
 	params: Promise<{ locale: string }>;
@@ -15,7 +18,14 @@ const Home = async ({ params }: Props) => {
 		redirect({ href: "/settings", locale });
 	}
 
-	return <LoginPage />;
+	return (
+		<>
+			<Hero locale={locale} />
+			<SocialProof />
+			<LearningPaths />
+			<Features />
+		</>
+	);
 };
 
 export default Home;

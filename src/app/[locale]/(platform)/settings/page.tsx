@@ -1,10 +1,10 @@
+import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
+import { AccountSection } from "@/components/AccountSection";
+import { redirect } from "@/lib/i18n/routing";
 import { auth } from "@/lib/auth/server";
 import { db } from "@/lib/db";
 import { account } from "@/lib/db/schema";
-import { eq } from "drizzle-orm";
-import { redirect } from "@/i18n/routing";
-import { AccountSection } from "@/components/AccountSection";
 
 type Props = {
 	params: Promise<{ locale: string }>;

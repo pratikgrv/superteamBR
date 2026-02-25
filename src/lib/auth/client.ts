@@ -1,9 +1,9 @@
-import { createAuthClient } from "better-auth/react";
 import { multiSessionClient } from "better-auth/client/plugins";
-import { siwxClient } from "./siws/siwx-client";
+import { createAuthClient } from "better-auth/react";
 import { env } from "../env";
+import { siwxClient } from "./siws/siwx-client";
 
 export const authClient = createAuthClient({
-	baseURL: env.NEXT_PUBLIC_APP_URL,
-	plugins: [multiSessionClient(), siwxClient()],
+  baseURL: env.NEXT_PUBLIC_APP_URL,
+  plugins: [multiSessionClient(), siwxClient()],
 });
