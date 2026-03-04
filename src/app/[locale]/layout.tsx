@@ -4,7 +4,7 @@ import { getMessages, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 
-import { inter, geistMono } from "@/app/fonts";
+import { inter, geistMono, archivo } from "@/app/fonts";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import { WalletProvider } from "@/providers/WalletProvider";
 import { Toaster } from "@/components/ui/sonner";
@@ -36,11 +36,8 @@ export default async function LocaleLayout({
 
 	return (
 		<html lang={locale} suppressHydrationWarning>
-			<head>
-				<title>Superteam Brazil LMS</title>
-			</head>
 			<body
-				className={`${inter.variable} ${geistMono.variable} font-sans antialiased`}
+				className={`${inter.variable} ${geistMono.variable} ${archivo.variable} font-sans antialiased`}
 			>
 				<ThemeProvider
 					attribute="class"

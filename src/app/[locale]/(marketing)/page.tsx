@@ -31,7 +31,7 @@ export default async function Home() {
             
             {/* Content Side */}
             <div className="flex flex-col text-center lg:text-left">
-              <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-7xl mb-6 leading-tight">
+              <h1 className=" font-archivo text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-7xl mb-6 leading-tight">
                 Master Web3, <br className="hidden sm:block" />
                 <span className="text-primary italic">Blockchain</span> & Smart Contracts
               </h1>
@@ -41,10 +41,10 @@ export default async function Home() {
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                <Button asChild size="lg" className="h-14 px-8 rounded-full font-bold">
+                <Button asChild size="lg" className="">
                   <Link href="/courses">Explore Learning Paths</Link>
                 </Button>
-                <Button asChild variant="outline" size="lg" className="h-14 px-8 rounded-full font-bold">
+                <Button asChild variant="outline" size="lg" className="">
                   <Link href="/login">Sign Up Free</Link>
                 </Button>
               </div>

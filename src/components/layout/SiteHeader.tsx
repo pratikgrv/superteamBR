@@ -32,20 +32,19 @@ import { useTheme } from "next-themes";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useUserProgress } from "@/hooks/useUserProgress";
 import { Loader2 } from "lucide-react";
+import Image from "next/image";
 
 
 interface ClientHeaderProps {
 
   user?: User ;
-  currentStreak?: number;
-  xpBalance?: string;
+  
 }
 
 export function SiteHeader({
  
   user,
-  currentStreak = 14,
-  xpBalance = "2,450",
+  
 }: ClientHeaderProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -54,9 +53,7 @@ export function SiteHeader({
   const walletAddress = publicKey?.toBase58();
   const { progress, isLoading } = useUserProgress(walletAddress);
 
-  const displayStreak = progress?.streakDays ?? currentStreak;
-  const displayXp = progress?.totalXp?.toLocaleString() ?? xpBalance;
-  
+ 
   const locale = useLocale();
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -87,9 +84,8 @@ export function SiteHeader({
       <div className="flex items-center gap-4 md:gap-8">
         {/* Logo */}
         <Link href="/" className="text-lg md:text-xl font-bold tracking-tight text-foreground uppercase flex items-center gap-2">
-          <TerminalSquare className="w-6 h-6 text-primary" strokeWidth={1.5} />
-          <span className="hidden sm:inline tracking-tighter">W3LEARN</span>
-          <span className="sm:hidden tracking-tighter">W3L</span>
+
+          <span className="hidden sm:inline tracking-tighter"><Image src="/assets/ST-YELLOW-HORIZONTAL.svg" alt="Logo" width={48} height={48} className="h-12" /></span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -97,7 +93,7 @@ export function SiteHeader({
           {/* Explore Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="px-3 py-1.5 h-9 text-sm font-medium text-foreground gap-1">
+              <Button variant="ghost" className="text-foreground gap-1 text-sm text-muted-foreground">
                 Explore <ChevronDown className="w-4 h-4 text-muted-foreground" />
               </Button>
             </DropdownMenuTrigger>
@@ -127,7 +123,7 @@ export function SiteHeader({
             <Link 
               key={idx} 
               href={link.href} 
-              className="px-3 py-1.5 rounded-md text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+              className=" text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
             >
               {link.name}
             </Link>
@@ -139,7 +135,7 @@ export function SiteHeader({
         {/* Search Bar (Desktop) */}
         <div className="hidden lg:block relative w-64">
           <form onSubmit={handleSearchSubmit}>
-            <div className="relative flex items-center w-full h-9 rounded-md border border-input bg-muted/50 px-3 ring-offset-background focus-within:ring-1 focus-within:ring-ring focus-within:border-primary transition-colors">
+            <div className="relative flex items-center w-full h-9 rounded-full border border-input bg-muted/50 px-3 ring-offset-background focus-within:ring-1 focus-within:ring-ring focus-within:border-primary transition-colors">
               <Search className="w-4 h-4 text-muted-foreground mr-2 shrink-0" strokeWidth={2} />
               <input
                 type="text"
@@ -148,9 +144,7 @@ export function SiteHeader({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-              <div className="hidden xl:flex items-center justify-center shrink-0 text-[10px] text-muted-foreground bg-background border border-border rounded px-1.5 py-0.5 ml-2 h-5">
-                <span className="leading-none">⌘K</span>
-              </div>
+             
             </div>
           </form>
         </div>
@@ -159,20 +153,7 @@ export function SiteHeader({
         <div className="flex items-center gap-1 md:gap-2">
           {user && (
             <>
-              {/* Gamification Stats */}
-              <div className="hidden sm:flex items-center gap-1.5 px-3 h-8 bg-muted border rounded-full hover:bg-accent transition-colors" title="Current Streak">
-                <Flame className="w-4 h-4 text-orange-500" strokeWidth={2.5} />
-                <span className="text-sm font-bold text-foreground">
-                  {isLoading ? <Loader2 className="w-3 h-3 animate-spin"/> : displayStreak}
-                </span>
-              </div>
-              <div className="hidden sm:flex items-center gap-1.5 px-3 h-8 bg-muted border rounded-full hover:bg-accent transition-colors" title="XP Balance">
-                <Zap className="w-4 h-4 text-yellow-500" strokeWidth={2.5} />
-                <span className="text-sm font-bold text-foreground">
-                  {isLoading ? <Loader2 className="w-3 h-3 animate-spin"/> : displayXp}
-                </span>
-              </div>
-              
+           
               <button className="relative w-8 h-8 rounded-full text-muted-foreground hover:bg-accent hover:text-foreground transition-colors flex items-center justify-center mx-1">
                 <Bell className="w-4 h-4" strokeWidth={2} />
                 <span className="absolute top-2 right-2 w-1.5 h-1.5 bg-accent rounded-full border border-background"></span>
